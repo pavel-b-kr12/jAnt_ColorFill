@@ -1,16 +1,6 @@
-//2017.06.08-2017.06.26 experiments by pavel.b.kr12 ????? ????????, ????
-
 import controlP5.*;
+
 ControlP5 cp5;
-
-PImage flore=createImage(1024, 1024, ARGB);
-PImage fire=createImage(1024, 1024, RGB);
- //https://processing.org/reference/createImage_.html
-
-
-
-
-
 int myColorBackground = color(0,0,0);
 int sliderValue = 100;
 int slider0 = 10;
@@ -19,17 +9,15 @@ int slider2 = 30;
 int slider3 = 50;
 
 
-boolean bFilter=false;
-boolean bCell=true;
-boolean bCellUpd=false;
+boolean bToggle;
 
 PFont pfont;
 
 
 
-float X=333;
-float Y=333;
-float dir=0;
+int X=333;
+int Y=333;
+int dir=0;
 
 int X1=333;
 int Y1=444;
@@ -40,7 +28,7 @@ int X2=655;
 int Y2=655;
 int dir2=0;
 
-int t=1000;
+int t=10000;
 int rM=155;
 int gM=155;
 int rMadd=20;
@@ -52,7 +40,7 @@ int gmadd=-1;
 int bmadd=2;
 
 
-int t1=1000;
+int t1=10000;
 int rM1=145;
 int gM1=145;
 int rMadd1=20;
@@ -64,7 +52,7 @@ int gmadd1=1;
 int bmadd1=-2;
 
 
-int t2=1000;
+int t2=10000;
 int rM2=245;
 int rMadd2=20;
 int gMadd2=6;
@@ -75,7 +63,7 @@ int gmadd2=-3;
 int bmadd2=-2;
 
 void setup() {
-   size(1024,1024);
+   size(1000,900);
    background(0);
    
   noStroke();
@@ -262,31 +250,16 @@ cp5.addSlider("bmadd2")
 .setSize(100,6);
 pos+=8;
 	 
-
-  cp5.addToggle("bFilter")
+/* 
+  cp5.addToggle("bToggle")
      .setPosition(10,pos)
-     .setSize(80,12)
-     .setMode(Toggle.SWITCH)
-     ;
-pos+=8;
-pos+=8;
-
-  cp5.addToggle("bCell")
-     .setPosition(10,pos)
-     .setSize(80,12)
-     .setMode(Toggle.SWITCH)
-     ;
-pos+=8; 
-pos+=8; 
- cp5.addToggle("bCellUpd")
-     .setPosition(10,pos)
-     .setSize(80,12)
+     .setSize(80,20)
      .setMode(Toggle.SWITCH)
      ;
 pos+=8;
 
 pos+=8;
-
+*/
 /*
 for(int i=0;i<5;i++)
 {
@@ -301,27 +274,15 @@ for(int i=0;i<5;i++)
    
    
    
-    pfont = createFont("Arial",65,true); // use true/false for smooth/no-smooth
+    pfont = createFont("Arial",55,true); // use true/false for smooth/no-smooth
   ControlFont font = new ControlFont(pfont,241);
 
-  /*
-loadPixels();
-for (int i = 0; i < (width*height/2)-width/2; i++) {
-  pixels[i]=i;
-}
-updatePixels();
-*/
-
-
-
-flore.loadPixels();
-for (int i = 0; i < flore.pixels.length; i++) {
-	flore.pixels[i] = color(0, 0, 255, 255);
-}
-flore.updatePixels();
-
-
-
+  
+   // loadPixels();
+// for (int i = 0; i < (width*height/2)-width/2; i++) {
+  // pixels[i]=i;
+// }
+// updatePixels();
 }
 
   
@@ -331,156 +292,180 @@ flore.updatePixels();
 
 
 int il;
-int xt,yt;
-int printT;
 void draw() {
 il++;
-
-flore.loadPixels();
-for (int i = 0; i < flore.pixels.length; i++) {
-int c=flore.pixels[i];
-int floreMHiH = c>>24 & 0xff; //24 //A
-int floreMLow = c>>16 & 0xff; //16 //R
-int floreMHi = c>>8 & 0xff; //8 //G
-int floreMLowH = c & 0xff; //B
-if(printT%10000==0) println (floreMLow+" "+floreMHi+" "+floreMLowH+" "+floreMHiH);
-printT++;
-
-if(floreMLow==0) //new
-{
- if(random(255)>200) floreMLow=1;
-	//if((i+il)%100==0) floreMLow=1;
-  //if(getSum_floreMHi(i)>
-}
-else
-if(floreMLow<255) //new & grow
-	floreMLow++; 
-else
-{
-	if(floreMLowH>5) floreMLowH--;
-}
-
-
-
-if(floreMHi==0) //new
-{
-	if(random(255)>230) floreMHi=1;
-	//if((i+il)%100==0) floreMHi=1;
-  //if(getSum_floreMHi(i)>
-}
-else
-if(floreMHi<255) //grow
-{
-  if(random(255)>130) floreMHi++;
-  
-   
-}
-
-if(floreMHi>128 && floreMHiH>10) floreMHiH--;
-
-
-
-
-
-
-
-  //flore.pixels[i] = color(floreMLowH, floreMHiH, floreMLow, floreMHi); 
-  flore.pixels[i] = color( floreMLow, floreMHi, floreMLowH,floreMHiH); //floreMHiH
-}
-flore.updatePixels();
-image(flore, 0, 0);
-
-
-
       // il++;
       // textFont(pfont);
-      // fill(0,120, 20);
+      // fill(255,248, 192);
       
       
-      // if(il%50==0)
+      // if(il%100==0)
       // {
         
-        // text("1234567", 260, 150);  //ßקסלטעü
+        // text("Qwerty", 50, 50);
       // }else
-      // if(il%5==0)
+      // if(il%20==0)
       // {
         
-        // text("Qwer", 50, 120);
+        // text("Qw", 50, 50);
       // }
       // else
       // {
         
-        // text("Qw", 50, 120);
+        // text("Q", 50, 50);
       // }
       
-   // fill(BG);
+    //fill(BG);
       
+     
+//loadPixels();
 
-/*
 
-for(int j=0;j<5;j++)
+
+for(int j=0;j<1000;j++)
 {
 
-
-//if(bCellUpd) loadPixels();
-//if(bCell)
-
-for (int x=0;x<width;x++)
-{
- for (int y=0;y<height;y++)
- {
- 
- 
-color c =get(x, y);
- 
+for(int i=0;i<t;i++)
+{								
+color c =get(X, Y);
 int r = c>>16 & 0xff; //16
 int g = c>>8 & 0xff; //8
 int b = c & 0xff;
 
-float value = hue(c);
+if(r<rM)  //-((il/4)%8) && g<gM
+{
+	set(X, Y, color(r+rMadd, g+gMadd,bMadd)); dir++;
+}
+else //if(r>rm)  
+{
+	set(X, Y, color(r+rmadd, g+gmadd,b+bmadd)); dir--;
+}
+				// else
+				// {
+					// set(X, Y, color(r+1, g+1,b-1));
+				// }
 
-//set(x, y, color(r+1, g+1,b+1));
+if(dir<0) dir=7;
+else if(dir==8) dir=0;
+	switch(dir)
+	{
+	 case 0: X++; break;
+	 case 1: X++;Y++; break;
+	 case 2: Y++; break;
+	 case 3: Y++;X--; break;
+	 case 4: X--; break;
+	 case 5: X--;Y--; break;
+	 case 6: Y--; break;
+	 case 7: Y--;X++; break;
+	}
+}
 
-float RR=red(get(x, y))+red(get(x-1, y))+red(get(x+1, y))+red(get(x, y-1))+red(get(x, y+1));
- if( RR>200)
- {
-   set(x, y, color(100, 222,111));
- }
- else
- if( RR<200)
- {
-  set(x, y, color(0, 0,0));
+//=============================================
+for(int i=0;i<t1;i++)
+{								
+color c =get(X1, Y1);
+int r = c>>16 & 0xff; //16
+int g = c>>8 & 0xff; //8
+int b = c & 0xff;
+
+if(r<rM1)  //-((il/2)%16)   && g<gM1
+{
+	set(X1, Y1, color(r+rMadd1, g+gMadd1,bMadd1)); dir1++;
+}
+else //if(r>rm1)  
+{
+	set(X1, Y1, color(r+rmadd1, g+gmadd1,b+bmadd1)); dir1--;
 }
 
 
-  // println(r+" "+g);
-  // delay(10);
- }
+if(dir1<0) dir1=7;
+else if(dir1==8) dir1=0;
+	switch(dir1)
+	{
+	 case 0: X1++; break;
+	 case 1: X1++;Y1++; break;
+	 case 2: Y1++; break;
+	 case 3: Y1++;X1--; break;
+	 case 4: X1--; break;
+	 case 5: X1--;Y1--; break;
+	 case 6: Y1--; break;
+	 case 7: Y1--;X1++; break;
+	}
+}
+
+//=============================================
+
+for(int i=0;i<t1;i++)
+{		
+						
+color c =get(X2, Y2);
+int r = c>>16 & 0xff; //16
+int g = c>>8 & 0xff; //8
+int b = c & 0xff;
+
+if(r<rM2)  //255-(il/2)%128
+{
+	set(X2, Y2, color(r+rMadd2, g+gMadd2,bMadd2)); dir2++;
+}
+else  //if(r>rm2)  //-(il)%128
+{
+	set(X2, Y2, color(r+rmadd2, g+gmadd2,b+bmadd2)); dir2--;
+}
+
+
+if(dir2<0) dir2=7;
+else if(dir2==8) dir2=0;
+	switch(dir2)
+	{
+	 case 0: X2++; break;
+	 case 1: X2++;Y2++; break;
+	 case 2: Y2++; break;
+	 case 3: Y2++;X2--; break;
+	 case 4: X2--; break;
+	 case 5: X2--;Y2--; break;
+	 case 6: Y2--; break;
+	 case 7: Y2--;X2++; break;
+	}
 }
 
 
 
 
-//if(bCellUpd) updatePixels();
-
-
 
 }
 
-*/
+// for (int x=0;x<width;x++)
+// {
 
-/*
-				if(bFilter)
-				{
-					filter(ERODE);
-					//filter(BLUR);
-				}
-				*/
+ // for (int y=0;y<height;y++)
+ // {
+// /*
+// int r = ((col >> 16) & 0xFF);
+// int g = ((col >> 8) & 0xFF);
+// int b = (col & 0xFF);  
+// */
+// color c =getP(x, y);
+ 
+// int r = c>>16 & 0xff; //16
+// int g = c>>8 & 0xff; //8
+// int b = c & 0xff;
+
+// float value = hue(c);
+
+ // if(red(getP(x-1, y))+red(getP(x+1, y))+red(getP(x, y-1))+red(getP(x, y+1)) >255)
+ // {
+   // set(x, y, color(r, g+1,b));
+ // }
+
+ // }
+// }
+
+
+//updatePixels();
+
+				if(!bToggle){}
 }
 
-
-
-/*
 color getP(int x, int y)
 {
   if(x>=width) x=x-width;
@@ -498,10 +483,11 @@ void setP(int x, int y, color c)
 {
 //if(x>width)
  set(x, y, c);
-}
-  */
-  
 
+}
+  
+  
+  
   
   
 void slider(int theColor) {
@@ -518,34 +504,8 @@ void slider1(int theColor) {
 
 }
 
-boolean bdrag;
-boolean bdraw;
+
 void keyPressed() {
- if (key == 'm') bdrag=!bdrag;
- else if (key == 'f')
- {
-  background(123456);
- }
- else if (key == 'd')
- {
-  bdraw=!bdraw;
- }
- else 
- {
   //cp5.getController("sliderValue").setValue(150);
   background(0);
-  }
-}
-
-void mouseClicked() {
-  X1= mouseX;
-  Y1= mouseY;
-}
-
-void mouseDragged() 
-{
-if(bdraw)  set(mouseX,mouseY, color(0,128,255));
- if(! bdrag) return;
-  X2= mouseX;
-  Y2= mouseY;
 }
