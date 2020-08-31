@@ -4,9 +4,14 @@
 
 * colorFillGen_play_anim - experiments with 3 separate fields. Presets was not implemented, so Choose type from revision hisory! (TODO set revision hisory from HG)
 
-###Install
+### Install
+
 * install desctop Processing IDE
+
 * install ControlP5 library (from Processing: sketch/import library/add )
-###TODO
+
+### TODO
+
 * presets, save/load setings
+
 * upd colorFillGen_play_anim to fastest methods from ant_banchmark
