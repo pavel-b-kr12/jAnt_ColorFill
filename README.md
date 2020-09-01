@@ -2,7 +2,7 @@
 
 * ant_banchmark - basic app for testing and startup
 
-* colorFillGen_play_anim - experiments with 3 separate fields. Presets was not implemented, so Choose type from revision hisory! (TODO set revision hisory from HG)
+* colorFillGen_play_anim - experiments with 3 separate fields (2017.7.6-10). Presets was not implemented, so Choose type from revision hisory! (TODO set revision hisory from HG)
 
 ### Install
 
